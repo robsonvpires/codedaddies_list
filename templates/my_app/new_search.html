@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+
+<h2 style="text-align:center; font-size:20">{{ search | title }}</h2>
+
+<form action="{% url 'largest_price' %}"class="center">
+    <a>order by:
+    {% csrf_token %}
+    <button class="waves-effect waves-teal btn-flat" type="submit" name="action">largest price</button>
+    <button class="waves-effect waves-teal btn-flat" type="" name="">lowest price</button>
+    </a>
+</form>
+{% block largest_price %}
+
+<div  class ="row">
+
+    {% for post in final_postings %}
+        <div class="col m3 l2">
+            <div class="card">
+                <div class="card-image" >
+                    <a href="{{ post.1 }}"><img src="{{ post.3 }}" alt=""></a>
+                </div>
+                <div class="card-content">
+                    <p>{{ post.0 }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{ post.1 }}" style="color:DarkCyan">{{ post.2 }} </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock largest_price %}
+
+
+{% endblock content %}
+{% extends 'new_search.html' %}
+
+{% block largest_price %}
+<div  class ="row">
+    {% for post in final_postings %}
+        <div class="col m3 l2">
+            <div class="card">
+                <div class="card-image" >
+                    <a href="{{ post.1 }}"><img src="{{ post.3 }}" alt=""></a>
+                </div>
+                <div class="card-content">
+                    <p>{{ post.0 }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{ post.1 }}" style="color:DarkCyan">{{ post.2 }} </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock largest_price %}
